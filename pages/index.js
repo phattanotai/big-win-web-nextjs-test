@@ -1,65 +1,58 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import LayoutHoc from "../components/Layout/LayoutHoc";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <LayoutHoc>
+      <div>
+        <img
+          src="./images/BIGWIN3.png"
+          style={{ maxWidth: "100%", minHeight: "100%", margin: 0 }}
+        />
+      </div>
+      <div className="jeckpotDiv" style={{ paddingBottom: "60px" }}>
+        <div className="row" >
+          <div className="col-sm-12">
+            <div id="jeckpot">
+              <label>JACKPOT</label>
+            </div>
+          </div>
         </div>
-      </main>
+        <div className="row" style={{paddingLeft: '10%',paddingRight: '10%',marginBottom: 50}} >
+          {/* <div className="col-sm-12" >
+            <div id="money" >
+            <button type="button" className="btn btn-light jp-btn" style={{position: 'absolute'}}>
+              sport betting and casio online
+            </button>
+              <label>1,000,000 $</label>
+            </div>
+          </div> */}
+           <div className="col-sm-12">
+            <img src="./images/Group 4.png" width="100%" height="200" />
+          </div>
+        </div>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+        <div className="row">
+          <div className="col-sm-4">
+            <button type="button" className="btn btn-light">
+              SPORT
+            </button>
+            <img src="./images/soccer-team-png-16.png" width="90%" height="250px" className="jp-img" />
+          </div>
+
+          <div className="col-sm-4">
+            <button type="button" className="btn btn-light ">
+              CASINO
+            </button>
+            <img src="./images/girl-casino.png" width="90%" height="250px" className="jp-img" />
+          </div>
+          <div className="col-sm-4">
+            <button type="button" className="btn btn-light">
+              GAMES
+            </button>
+            <img src="./images/casino-mobile-platform.png" width="90%" height="250px" className="jp-img"/>
+          </div>
+        </div>
+      </div>
+    </LayoutHoc>
+  );
 }

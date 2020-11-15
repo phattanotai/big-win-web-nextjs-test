@@ -4,6 +4,8 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: black !important;
+  font-size: 16px;
 }
 
 a {
@@ -13,4 +15,133 @@ a {
 
 * {
   box-sizing: border-box;
+}
+/* header */
+#header{
+  position: fixed;
+  width: 100%;
+  z-index: 1003;
+}
+ .bg-dark {
+  background-color: black !important;
+}
+#header .nav-link {
+  color: rgb(253, 253, 253) !important;
+  padding: 5px;
+  /* border-right: 2px solid rgb(156, 155, 155); */
+}
+a:hover {
+  color: rgb(90, 89, 88);
+}
+#header .h-btn {
+  border-radius: 28px;
+}
+/* end header */
+/* content */
+#content{
+  min-height: 93vh;
+  position: relative;
+  top: 100px;
+}
+/*end content */
+/* footer */
+footer {
+  color: white !important;
+  border-bottom: 5px solid red;
+  background-color: black !important;
+  padding-top: 50px;
+}
+
+footer .addCredit {
+  color: rgb(250, 209, 107);
+}
+
+#menu-bottom{
+  position: "fixed";
+  bottom: 0;
+}
+
+/* end footer */
+
+.jeckpotDiv {
+  /* background-image: url('../public/images/Image -1.png'); */
+  min-height: 700px;
+  max-width: 100%;
+  background-size: cover;
+  border-bottom: 5px solid red;
+  margin: auto;
+}
+
+.jeckpotDiv .col-sm-4 {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+.jeckpotDiv {
+  margin: auto;
+  text-align: center;
+}
+.jeckpotDiv .row {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+.jeckpotDiv button {
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.jeckpotDiv .jp-img {
+  border: 5px solid red;
+  border-radius: 5px;
+}
+.jp-btn {
+  top: -30px;
+  z-index: 200;
+}
+.jeckpotDiv #jeckpot {
+  font-size: 40px;
+  text-shadow: 2px 0px;
+  color: rgb(250, 209, 107);
+  font-weight: bold;
+}
+
+.jeckpotDiv #money {
+  font-size: 45px;
+  color: rgb(250, 209, 107);
+  font-weight: bold;
+  border: 5px solid red;
+  border-radius: 5px;
+  text-align: center;
+  text-shadow: 1px 1px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: auto;
+}
+
+.jeckpotDiv .row {
+  text-align: center;
+}
+
+.row {
+  width: 100%;
+}
+
+/* slide menu */
+#slide-menu {
+  width: 100%;
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  background-color: goldenrod; 
+
+  height: 100%;
+  position: fixed;
+  z-index: 1060;
+  right: 0;
+  overflow-x: hidden;
+  transition: .15s;
 }
