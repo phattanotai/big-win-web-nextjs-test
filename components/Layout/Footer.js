@@ -3,26 +3,41 @@ import React, { useEffect, useState } from "react";
 import brand from "../../services/brand";
 import LoginModal from "../LoginModal";
 import Cookies from "js-cookie";
+import Link from "next/link";
+import Router, { useRouter } from "next/router";
 
 const Footer = (props) => {
   const [mobile, setMoblie] = useState(false);
   const [brands, setBrands] = useState([]);
-  const [login, setLogin] = useState(Boolean(Cookies.get("member")));
+  const [isLogin, setIsLogin] = useState(false);
+
+  const [login, setLogin] = useState("none");
+  const [notLogin, setNotLogin] = useState("none");
+
   useEffect(async () => {
     const data = await brand.getBrandsSort();
     setBrands(data.data.data);
     setMoblie(window.matchMedia("only screen and (max-width: 760px)").matches);
+    if (Boolean(Cookies.get("member"))) {
+      setLogin("block");
+      setNotLogin("none");
+      setIsLogin(true);
+    } else {
+      setNotLogin("block");
+      setLogin("none");
+      setIsLogin(false);
+    }
   }, []);
   const openModal = () => {
-    $("#exampleModal").modal("show");
+    $("#loginModal").modal("show");
   };
-
+  const logout = () =>{
+    Cookies.remove("member");
+    Router.push("/");
+  }
   return (
     <>
-      <footer
-        className="main-footer clearfix bg-dark"
-        style={{ marginTop: "50px", position: "relative" }}
-      >
+      <footer className="main-footer clearfix">
         <div
           className="container "
           style={{
@@ -32,14 +47,16 @@ const Footer = (props) => {
           }}
         >
           <div className="addCredit">
-            <h3>ช่องทางการเติมเงิน</h3>
-            <img
-              src="/images/Image 8.png"
-              alt="1X2 Gaming slot"
-              width="10%"
-              height="8%"
-              style={{ objectFit: "contain", marginTop: 30 }}
-            />
+            <h3>ช่องทางการติดต่อ</h3>
+            <a href="https://line.me/R/ti/p/%40662iocjv" target="_blank">
+              <img
+                src="/images/Image 8.png"
+                alt="1X2 Gaming slot"
+                width={mobile ? "50%" : "10%"}
+                height={mobile ? "50%" : "8%"}
+                style={{ objectFit: "contain", marginTop: 30 }}
+              />
+            </a>
           </div>
           <div style={{ marginBottom: 30, marginTop: 30 }}>
             <img
@@ -52,17 +69,57 @@ const Footer = (props) => {
           </div>
           {brands.map((b, index) => {
             return (
-              <a href="" key={`${b._id}`}>
-                <img
-                  src={"https://BigWin1234.com/public/" + b.brand_img}
-                  alt="1X2 Gaming slot"
-                  width="40px"
-                  height="40px"
-                  style={{ objectFit: "contain", margin: "0px 5px  10px" }}
-                />
-              </a>
+              <Link href="" key={`${b._id}`}>
+                <a>
+                  <img
+                    src={"https://BigWin1234.com/public/" + b.brand_img}
+                    alt="1X2 Gaming slot"
+                    width="40px"
+                    height="40px"
+                    style={{ objectFit: "contain", margin: "0px 5px  10px" }}
+                  />
+                </a>
+              </Link>
             );
           })}
+        </div>
+        <div
+          id="menu-bottom"
+          style={{
+            position: "fixed",
+            bottom: 0,
+            display: mobile ? "flex" : "none",
+          }}
+        >
+          <nav className="footer-menu navbar navbar-light  justify-content-between">
+            <div
+              className="row"
+              style={{ width: "100vw", textAlign: "center",display: isLogin? 'none' : 'flex' }}
+            >
+              <div className="col-6">
+                <a className="nav-link" href="#" onClick={openModal}>
+                  เข้าสู่ระบบ
+                </a>
+              </div>
+              <div className="col-6">
+                <Link href="/register">
+                  <a className="nav-link">สมัครสมาชิก</a>
+                </Link>
+              </div>
+            </div>
+            <div className="row"  style={{ width: "100vw", textAlign: "center",display: !isLogin? 'none' : 'flex' }}>
+              <div className="col-6">
+                <a className="nav-link" href="#" onClick={logout}>
+                  ออกจากระบบ
+                </a>
+              </div>
+              <div className="col-6">
+                <a className="nav-link" href="#">
+                  โปรไฟล์
+                </a>
+              </div>
+            </div>
+          </nav>
         </div>
 
         <div
@@ -78,50 +135,6 @@ const Footer = (props) => {
           <div className="col-6" style={{ textAlign: "right" }}>
             {props.rightContent && props.rightContent}
           </div>
-        </div>
-
-        <div id="menu-bottom"
-          style={{
-            position: "fixed",
-            bottom: 0,
-            display: mobile ? "flex" : "none",
-          }}
-        >
-          <nav className="navbar navbar-light bg-dark justify-content-between ">
-            <div
-              className="row"
-              style={{ width: "100vw", textAlign: "center" }}
-            >
-              {!login && (
-                <>
-                  <div className="col-6">
-                    <a className="nav-link" href="#" onClick={openModal}>
-                      เข้าสู่ระบบ
-                    </a>
-                  </div>
-                  <div className="col-6">
-                    <a className="nav-link" href="#">
-                      สมัครสมาชิก
-                    </a>
-                  </div>
-                </>
-              )}
-              {login && (
-                <>
-                  <div className="col-6">
-                    <a className="nav-link" href="#" onClick={openModal}>
-                      ออกจากระบบ
-                    </a>
-                  </div>
-                  <div className="col-6">
-                    <a className="nav-link" href="#">
-                      โปรไฟล์
-                    </a>
-                  </div>
-                </>
-              )}
-            </div>
-          </nav>
         </div>
         <LoginModal />
       </footer>

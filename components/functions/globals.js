@@ -1,0 +1,63 @@
+module.exports = {
+  USERNAME: '',
+  PASSWORD: '',
+  USERLOGIN: false,
+  NAVIGATE: null,
+  ISLOADING: false,
+  GAMES_DATA: null,
+  GAMES_DATA2: null,
+  GAMES_DATA_ALL:null,
+  USER_DATA: null,
+  MEMDATA: null,
+  AGENTCODE: '',
+  GAMESTYPE: ['Hits', 'Slot', 'Card', 'Arcade', 'Fish', 'LiveCasino' ],
+  GAMESDATA: [],
+  DEFAULT_GAMESTYPE: 'Hits',
+  BACKGROUND: './assets/slot.jpg',
+  SOUNDPLAYER: null,
+
+  GAME_AGENTCODE: '',
+  GAME_CODE: '',
+  GAME_BRAND: '',
+  GAME_MEMBER: '',
+
+  LIVECASINO_GAMES: null,
+  LINE_AGENT: '',
+
+  CRYPTO0: '',
+  CRYPTO1: '',
+  CRYPTO2: '',
+  CRYPTONITE: '',
+  //agent_code: rowData.agent_code, game_code: rowData.game_code, game_brand: rowData.game_brand
+
+  NEWSDATA: null,
+  TOPUPDATA: null,
+  NEWHANDICAP: null,
+  PROMOTION: null,
+  OPENTOPUP: false,
+  OPENMISSION: false,
+  OPENPROMOTION: false,
+  OPENGAMESBROWSER: false,
+
+  GAMES_HITS: null,
+  GAMES_CARD: null,
+  GAMES_ARCADE: null,
+  GAMES_FISH: null,
+  GAMES_LIVECASINO: null,
+
+  GAMES_SLOT_BRAND: null,
+  GAMES_SLOT_PROVIDER: null,
+  GAMES_SLOT: null,
+  GAMES_SLOT_GAMES_PROVIDER: [],
+  GAMES_SLOT_GAMES: [],
+
+  GAMEPROVIDER: null,
+  SLOTBRAND: null,
+  GAME_URL: '',
+
+  PLAYURL1: '',
+  PLAYURL2: '',
+  PLAYURL3: '',
+  PLAYURL4: '',
+  PLAYURL5: '',
+};

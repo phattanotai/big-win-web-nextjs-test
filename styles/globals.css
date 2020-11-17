@@ -4,10 +4,50 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: black !important;
+  background-color: rgb(0, 0, 0) !important;
   font-size: 16px;
+  color: rgb(250, 209, 107);
+}
+/* v */
+.ast-required {
+  color: red;
+}
+.has-error {
+  border-color: #f8877f !important;
+  box-shadow: none !important;
+  color: red !important;
+}
+.has-error .form-control {
+  border-color: #f8877f !important;
+  box-shadow: none !important;
+}
+.has-error .btn.dropdown-toggle.btn-default {
+  border-color: #f8877f !important;
+  box-shadow: none !important;
+}
+.toastr {
+  opacity: 1 !important;
 }
 
+.icon-user-regular {
+  width: 24px;
+  height: 27px;
+  background-image: url(../public/images/standard-header-user.svg);
+  background-size: cover;
+}
+
+.icon-signout-solid {
+  width: 22px;
+  height: 22px;
+  background-image: url(../public/images/standard-header-signout.svg);
+  background-size: cover;
+}
+
+/* end v */
+#__next {
+  padding: 0;
+  margin: 0;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -17,18 +57,23 @@ a {
   box-sizing: border-box;
 }
 /* header */
-#header{
+#header {
   position: fixed;
   width: 100%;
   z-index: 1003;
 }
- .bg-dark {
+.bg-dark {
   background-color: black !important;
 }
-#header .nav-link {
-  color: rgb(253, 253, 253) !important;
+#header .nav-pills .nav-link {
+  color: rgb(253, 253, 253);
   padding: 5px;
-  /* border-right: 2px solid rgb(156, 155, 155); */
+}
+
+#header .nav-pills .nav-link.active {
+  color: rgb(247, 11, 11);
+  padding: 5px;
+  background-color: black;
 }
 a:hover {
   color: rgb(90, 89, 88);
@@ -38,55 +83,149 @@ a:hover {
 }
 /* end header */
 /* content */
-#content{
+#content {
   min-height: 93vh;
   position: relative;
-  top: 100px;
+  top: 115px;
+}
+@media only screen and (max-width: 760px) {
+  #content {
+    top: 66px;
+  }
+}
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Fading animation */
+.fadeImg {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fadeImg {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeImg {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev,
+  .next,
+  .text {
+    font-size: 11px;
+  }
 }
 /*end content */
 /* footer */
 footer {
   color: white !important;
-  border-bottom: 5px solid red;
-  background-color: black !important;
-  padding-top: 50px;
+  border-bottom: 2px solid red;
+  border-top: 2px solid red;
+  background-color: rgb(0, 0, 0) !important;
+  padding-top: 5%;
+  /* margin-top: 50px; */
+  top: 115px;
+  position: relative;
 }
-
+@media only screen and (max-width: 760px) {
+  footer {
+    top: 66px;
+  }
+}
 footer .addCredit {
   color: rgb(250, 209, 107);
 }
 
-#menu-bottom{
-  position: "fixed";
-  bottom: 0;
+#menu-bottom {
+  position: fixed;
+  bottom: -2;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
 }
-
+#menu-bottom .row {
+  width: "100vw";
+  text-align: "center";
+}
+footer .footer-menu {
+  background-color: #007aff;
+}
 /* end footer */
 
-.jeckpotDiv {
-  /* background-image: url('../public/images/Image -1.png'); */
+/* index contentDiv */
+.contentDiv {
   min-height: 700px;
   max-width: 100%;
   background-size: cover;
-  border-bottom: 5px solid red;
-  margin: auto;
-}
-
-.jeckpotDiv .col-sm-4 {
-  margin: 0px;
-  padding: 0px;
-  width: 100%;
-}
-.jeckpotDiv {
+  padding-bottom: 60px;
   margin: auto;
   text-align: center;
 }
-.jeckpotDiv .row {
+@media only screen and (max-width: 760px) {
+  .contentDiv {
+    padding-bottom: 10px;
+  }
+}
+.contentDiv .col-sm-4 {
   margin: 0px;
   padding: 0px;
   width: 100%;
 }
-.jeckpotDiv button {
+
+.contentDiv .row {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+.contentDiv button {
   padding-left: 40px;
   padding-right: 40px;
   margin-bottom: 20px;
@@ -94,23 +233,39 @@ footer .addCredit {
   font-weight: bold;
 }
 
-.jeckpotDiv .jp-img {
+.contentDiv .jp-img {
   border: 5px solid red;
   border-radius: 5px;
 }
 .jp-btn {
-  top: -30px;
+  top: -20px;
+  left: 40%;
   z-index: 200;
 }
-.jeckpotDiv #jeckpot {
-  font-size: 40px;
+@media only screen and (max-width: 760px) {
+  .jp-btn {
+    left: 37%;
+  }
+}
+.contentDiv #jeckpot {
+  font-size: 60px;
   text-shadow: 2px 0px;
   color: rgb(250, 209, 107);
   font-weight: bold;
+  margin-top: 50px;
+}
+
+@media only screen and (max-width: 760px) {
+  .contentDiv #jeckpot {
+    font-size: 40px;
+  }
+}
+
+.contentDiv .row {
+  text-align: center;
 }
 
 .jeckpotDiv #money {
-  font-size: 45px;
   color: rgb(250, 209, 107);
   font-weight: bold;
   border: 5px solid red;
@@ -119,29 +274,268 @@ footer .addCredit {
   text-shadow: 1px 1px;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin: auto;
+  margin: 0 auto;
+  height: 50vh;
 }
-
-.jeckpotDiv .row {
-  text-align: center;
+.jeckpotDiv {
+  background-image: url("../public/images/Image -1.png");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
-
 .row {
   width: 100%;
 }
 
+/* end index contentDiv */
 /* slide menu */
 #slide-menu {
   width: 100%;
   display: none;
   position: absolute;
   z-index: 1000;
-  background-color: goldenrod; 
+  background-color: #f4edf5;
 
   height: 100%;
   position: fixed;
   z-index: 1060;
   right: 0;
   overflow-x: hidden;
-  transition: .15s;
+  transition: 0.15s;
 }
+
+/* end slide menu */
+
+/* modal */
+.modal-backdrop {
+  z-index: 100;
+}
+.modal-content {
+  z-index: 12000;
+  background-color: #1b1b1b;
+  border-radius: 10px;
+  border: 3px solid red;
+  opacity: 1;
+  box-shadow: 0 0 20px 5px rgba(190, 29, 29, 0.5);
+}
+
+.modal {
+  margin-top: 115px;
+  color: rgb(250, 209, 107);
+}
+
+@media only screen and (max-width: 760px) {
+  .modal {
+    margin-top: 66px;
+    color: rgb(250, 209, 107);
+  }
+}
+/* end modal */
+/* register */
+#register {
+  background-image: url("../public/images/Image -1.png");
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: rgb(250, 209, 107);
+}
+#register .container {
+  max-width: 30vw;
+  background-color: #1b1b1b;
+  border-radius: 10px;
+  border: 2px solid red;
+  padding: 30px 50px 70px 50px;
+}
+#register .container .row {
+  margin: 0;
+}
+@media only screen and (max-width: 760px) {
+  #register {
+    padding-top: 10px;
+  }
+  #register .container {
+    max-width: 90vw;
+    padding: 0;
+    padding-bottom: 30px;
+  }
+}
+/* end register */
+/* download */
+.loadapp {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+}
+.loadapp label {
+  font-size: 40px;
+  font-weight: bold;
+}
+.qrLoad {
+  max-width: 200px;
+  max-height: 200px;
+}
+.imgLoad {
+  max-width: 200px;
+  max-height: 60px;
+}
+.loadapp .imgLoad {
+  max-width: 200px;
+  max-height: 60px;
+}
+@media only screen and (max-width: 760px) {
+  .loadapp label {
+    font-size: 30px;
+  }
+  .qrLoad {
+    max-width: 80%;
+    max-height: 80%;
+  }
+  .imgLoad {
+    max-width: 70%;
+    max-height: 60%;
+  }
+  .loadapp .imgLoad {
+    max-width: 120px;
+    max-height: 60px;
+  }
+}
+/* end download */
+/* manual */
+.manualHeader {
+  text-align: center;
+}
+.manualHeader label {
+  font-size: 50px;
+  font-weight: bold;
+}
+.manualText {
+  text-align: center;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.manualText label {
+  background-color: rgb(250, 209, 107);
+  color: black;
+  border-radius: 20px;
+  padding: 10px 30px 10px 30px;
+  font-size: 25px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+}
+@media only screen and (max-width: 760px) {
+  .manualHeader label {
+    font-size: 40px;
+  }
+}
+
+/* end manual */
+/* games */
+.games-container {
+  max-width: 90vw;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.games-container .nav {
+  max-height: 50px;
+  min-height: 70px;
+  font-size: large;
+  display: flex;
+}
+.game-menu {
+  color: white;
+  list-style-type: none;
+  max-width: 70%;
+  color: white;
+  list-style-type: none;
+  text-align: center;
+
+}
+.games-container .row div {
+  padding-right: 2px;
+}
+.img-container {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  /* min-height: 120px; */
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+
+.middle {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.5s ease;
+  background-color: #008cba;
+}
+
+.img-container:hover .image {
+  opacity: 0.3;
+}
+
+.img-container:hover .middle {
+  opacity: 1;
+}
+
+.game-text {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+.game-btn {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+@media only screen and (max-width: 760px) {
+  .image {
+    width: 100%;
+    height: auto;
+    margin-top: 0px !important;
+  }
+  .game-text {
+    font-size: 14px;
+  }
+  .game-menu {
+    max-width: 90%;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+}
+/* end games */
