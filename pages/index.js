@@ -14,10 +14,12 @@ export default function Home() {
     <LayoutHoc>
       <SlideImages imagesArray={banners} nameEl='banners'/>
       <div className="contentDiv" >
+        <div className="bg-image">
+        </div>
         <div className="jeckpotDiv">
           <div className="row">
             <div className="col-sm-12">
-              <div id="jeckpot">
+              <div id="jeckpot" style={{marginTop: 0}}>
                 <label>JACKPOT</label>
               </div>
             </div>

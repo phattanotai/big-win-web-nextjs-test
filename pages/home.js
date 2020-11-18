@@ -19,7 +19,8 @@ export default function home() {
     slidesToScroll: 2,
   });
   const [banners, setBanners] = useState(banner);
-  const [loader, setLoader] = useState('block');
+  const [searchGame, setSearchGame] = useState("");
+  const [loader, setLoader] = useState("block");
   const [mobile, setMoblie] = useState(false);
   const [gameList, setGameList] = useState([]);
   const [gameShow, setGameShow] = useState([]);
@@ -34,10 +35,10 @@ export default function home() {
     token: "",
   });
 
-  const seleteGame = (tyle,name) => {
-    if(name === 'Slot'){
+  const seleteGame = (tyle, name) => {
+    if (name === "Slot") {
       setSlot(true);
-    }else{
+    } else {
       setSlot(false);
     }
     setGameSlot(null);
@@ -50,9 +51,15 @@ export default function home() {
     setGameShow(gameList[gameType].data[tyle].data);
   };
   const playGame = (g) => {
-    const url =  `${env.endpoint_game}/${g.game_brand}/launch/${g.game_code}/${memberData.agent_code}/${memberData.mem_username}`;
+    const url = `${env.endpoint_game}/${g.game_brand}/launch/${g.game_code}/${memberData.agent_code}/${memberData.mem_username}`;
     location.replace(url);
   };
+
+  const onSearch = (evt) => {
+    const { id, value } = evt.target;
+    setSearchGame(value);
+  };
+ 
   useEffect(async () => {
     setMoblie(window.matchMedia("only screen and (max-width: 760px)").matches);
     if (Boolean(Cookies.get("member"))) {
@@ -71,7 +78,6 @@ export default function home() {
           slidesToScroll: checkMobile ? 2 : 3,
         });
       }
-
       const gamesResult = await memberService.loadgameAll(member.agent_code);
       if (gamesResult.data.status === 2000) {
         for await (const i of gamesResult.data.data[5].gamelist) {
@@ -84,7 +90,7 @@ export default function home() {
               game_name = "เกมส์การ์ด";
             } else if (key === "Slot") {
               game_name = "เกมส์สล็อต";
-              for (const l of value){
+              for (const l of value) {
                 Object.entries(l).forEach(([key2, value2]) => {
                   slot.push({
                     name: key2,
@@ -97,14 +103,13 @@ export default function home() {
               game_name = "เกมส์ยิงปลา";
             } else if (key === "LiveCasino") {
               game_name = "คาสิโนสด";
-            }else if (key === "Livecasino") {
+            } else if (key === "Livecasino") {
               game_name = "คาสิโนสด";
             } else if (key === "Fish") {
               game_name = "เกมส์ยิงปลา";
             } else if (key === "Arcade") {
               game_name = "เกมส์อาเขต";
             }
-
             if (key === "Slot") {
               gamesArray.push({
                 textTh: game_name,
@@ -120,7 +125,7 @@ export default function home() {
             }
           });
         }
-        setLoader('none');
+        setLoader("none");
         setGameList(gamesArray);
         setGameShow(gamesArray[0].data);
       }
@@ -131,7 +136,8 @@ export default function home() {
       <div id="home">
         <SlideImages imagesArray={banners} nameEl="banners" />
         <div className="contentDiv">
-          <div className="jeckpotDiv">
+          <div className="bg-image"></div>
+          <div className="homeJeckpotDiv">
             <div className="row">
               <div className="col-sm-12">
                 <div id="jeckpot">
@@ -143,7 +149,7 @@ export default function home() {
               className="row"
               style={{
                 marginBottom: 50,
-                marginTop: 50,
+                marginTop: 40,
               }}
             >
               <div className="col-sm-12">
@@ -200,10 +206,7 @@ export default function home() {
             </div>
             <div className="col-sm-4">
               <button type="button" className="btn btn-light">
-                <Link href="/games">
-                    GAMES
-                </Link>
-               
+                <Link href="/games">GAMES</Link>
               </button>
               <img
                 src="./images/casino-mobile-platform.png"
@@ -215,20 +218,23 @@ export default function home() {
           </div>
         </div>
         <div className="games-container">
-          <div className="loader" style={{display: loader}}></div>
+          <div className="loader" style={{ display: loader }}></div>
           <div className="game-menu">
             <Slider {...settings}>
               {gameList.map((b, index) => {
-                if(b.textTh){
+                if (b.textTh) {
                   return (
                     <div key={index}>
                       <li
                         className="nav-item"
                         onClick={() => {
-                          seleteGame(index,b.textEn);
+                          seleteGame(index, b.textEn);
                         }}
                       >
-                        <a className="nav-link">
+                        <a
+                          className="nav-link"
+                          style={{ color: index === gameType ? "red" : "" }}
+                        >
                           {b.textTh}
                         </a>
                       </li>
@@ -237,36 +243,22 @@ export default function home() {
                 }
               })}
             </Slider>
+            <div
+              className="search-game"
+              style={{ display: loader === "block" ? "none" : "block" }}
+            >
+              <input
+                type="text"
+                className="form-control w3-input w3-border w3-round-xxlarge"
+                value={searchGame}
+                onChange={onSearch}
+              />
+            </div>
           </div>
-          <div className="row">
+          <div className="row" style={{margin: 0, marginTop: 50}}>
             {gameShow.map((b, index) => {
-              if (!slot) {
-                return (
-                  <div className="col-sm-2 col-6" key={b._id}>
-                    <div className="img-container">
-                      <img
-                        src={`${env.endpoint_img}/${b.game_img}`}
-                        alt={b.game_brand}
-                        name={b.game_name}
-                        className="image"
-                        style={{ objectFit: "contain", marginTop: 30 }}
-                      />
-                      <div className="middle">
-                        <div className="game-text">{b.game_name}</div>
-                        <button
-                          className="game-btn btn btn-info   w3-round-xxlarge"
-                          onClick={() => {
-                            playGame(b);
-                          }}
-                        >
-                          เล่น
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              } else {   
-                if (gameSlot !== null) {
+              if ((b.game_name).toLowerCase().search(searchGame.toLowerCase()) !== -1) {
+                if (!slot) {
                   return (
                     <div className="col-sm-2 col-6" key={b._id}>
                       <div className="img-container">
@@ -292,30 +284,57 @@ export default function home() {
                     </div>
                   );
                 } else {
-                  return (
-                    <div className="col-sm-2 col-6" key={index}>
-                      <div className="img-container">
-                        <img
-                          src={`${env.endpoint_img}/${b.img}`}
-                          alt={b.img}
-                          name={b.img}
-                          className="image"
-                          style={{ objectFit: "contain", marginTop: 30 }}
-                        />
-                        <div className="middle">
-                          <div className="game-text">{b.name}</div>
-                          <button
-                            className="game-btn btn btn-info   w3-round-xxlarge"
-                            onClick={() => {
-                              seleteSlotGame(index);
-                            }}
-                          >
-                            เลือก
-                          </button>
+                  if (gameSlot !== null) {
+                    return (
+                      <div className="col-sm-2 col-6" key={b._id}>
+                        <div className="img-container">
+                          <img
+                            src={`${env.endpoint_img}/${b.game_img}`}
+                            alt={b.game_brand}
+                            name={b.game_name}
+                            className="image"
+                            style={{ objectFit: "contain", marginTop: 30 }}
+                          />
+                          <div className="middle">
+                            <div className="game-text">{b.game_name}</div>
+                            <button
+                              className="game-btn btn btn-info   w3-round-xxlarge"
+                              onClick={() => {
+                                playGame(b);
+                              }}
+                            >
+                              เล่น
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
+                    );
+                  } else {
+                    return (
+                      <div className="col-sm-2 col-6" key={index}>
+                        <div className="img-container">
+                          <img
+                            src={`${env.endpoint_img}/${b.img}`}
+                            alt={b.img}
+                            name={b.img}
+                            className="image"
+                            style={{ objectFit: "contain", marginTop: 30 }}
+                          />
+                          <div className="middle">
+                            <div className="game-text">{b.name}</div>
+                            <button
+                              className="game-btn btn btn-info   w3-round-xxlarge"
+                              onClick={() => {
+                                seleteSlotGame(index);
+                              }}
+                            >
+                              เลือก
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
                 }
               }
             })}

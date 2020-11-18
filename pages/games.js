@@ -132,12 +132,12 @@ export default function games() {
       <div id="games">
         <div
           className="slideshow-container"
-          style={{ maxWidth: "100%", minHeight: "50vh", margin: 0 }}
+          style={{ maxWidth: "100%", minHeight: mobile? "25vh" : "50vh", margin: 0 }}
         >
           <div>
             <img
               src="./images/3846574@2x.png"
-              style={{ maxWidth: "100%", minHeight: "50vh", margin: 0 }}
+              style={{ maxWidth: "100%", minHeight: mobile? "25vh" : "50vh", margin: 0 }}
             />
           </div>
           <div className="loadapp">
@@ -183,7 +183,7 @@ export default function games() {
               })}
             </Slider>
           </div>
-          <div className="row">
+          <div className="row" style={{margin: 0}}>
             {gameShow.map((b, index) => {
               if (!slot) {
                 return (

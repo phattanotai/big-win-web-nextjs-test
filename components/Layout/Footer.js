@@ -37,7 +37,10 @@ const Footer = (props) => {
   };
   const logout = () =>{
     Cookies.remove("member");
-    Router.push("/");
+    toastr.success("Logout Success");
+    setTimeout(() => {
+      location.replace("/");
+    }, 1000);
   }
   return (
     <>

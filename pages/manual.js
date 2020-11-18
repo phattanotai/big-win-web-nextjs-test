@@ -9,6 +9,9 @@ export default function manual() {
   return (
     <LayoutHoc>
       <div id="manual">
+        <div className="bg-image">
+
+        </div>
         <div className="manualDiv">
           <div className="row">
             <div className="col-12">

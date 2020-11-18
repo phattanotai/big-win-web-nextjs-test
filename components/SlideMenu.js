@@ -8,6 +8,13 @@ export default function SlideMenu({ showMenu, onSubmit }) {
   const router = useRouter();
   const [path, setPath] = useState(menu);
   const [isLogin, setIsLogin] = useState(false);
+  const logout = () =>{
+    Cookies.remove("member");
+    toastr.success("Logout Success");
+    setTimeout(() => {
+      location.replace("/");
+    }, 1000);
+  }
   useEffect(() => {
     if (router.pathname) {
       setPath(
@@ -75,11 +82,20 @@ export default function SlideMenu({ showMenu, onSubmit }) {
             }
           })}
         </ul>
-        <div>
+        <div style={{ color: "white", marginTop: "80%" }}>
+        <button
+            className="w3-button w3-block w3-green"
+            type="button"
+            style={{display: isLogin? 'block': 'none'}}
+            onClick={logout}
+          >
+            ออกจากระบบ
+          </button>
+          <br/>
           <button
             className="w3-button w3-block w3-light-blue"
             type="button"
-            style={{ color: "white", marginTop: "80%" }}
+            
             onClick={onSubmit}
           >
             ปิด

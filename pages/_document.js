@@ -10,7 +10,7 @@ export default class MyDocument extends Document {
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="description" content="เบ็ทมั่นคง บริการคาสิโนออนไลน์ ยิงปลา สล็อต บาคาร่า แทงบอล สมัครง่าย ฝาก-ถอนอัตโนมัติ รวดเร็ว และพนักงานพร้อมให้บริการตลอด 24 ชม. คืนยอดเสีย สร้างรายได้ชวนเพื่อนเรทดีที่สุด" />
           <meta name="robots" content="index, follow" />
-          <title>Bigwin Web เว็บเกมส์ออนไลน์ที่ดีที่สุด</title>
+          <title>Bigwin เว็บเกมส์ออนไลน์ที่ดีที่สุด</title>
 
           <link rel="icon" type="image/png" href="/images/bw-4.png" sizes="30x30"></link>
           <link
