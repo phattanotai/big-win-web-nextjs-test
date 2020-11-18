@@ -1,13 +1,12 @@
 import Link from "next/link";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import styles from "../../styles/Header.module.css";
 import LoginModal from "../LoginModal";
 import RegisterModal from "../RegisterModal";
 import SlideMenu from "../SlideMenu";
 import Router, { useRouter } from "next/router";
 import menu from "../functions/menu";
-import fx from '../functions/useUser';
+import fx from "../functions/useUser";
 
 const Header = (props) => {
   const router = useRouter();
@@ -17,8 +16,8 @@ const Header = (props) => {
   const [notLogin, setNotLogin] = useState("none");
   const [slideMenu, setSlideMenu] = useState("none");
   const [path, setPath] = useState(menu);
-  const [memberData,setMemberDate] = useState({});
-  
+  const [memberData, setMemberDate] = useState({});
+
   useEffect(async () => {
     if (Boolean(Cookies.get("member"))) {
       setLogin("block");
@@ -44,11 +43,10 @@ const Header = (props) => {
   };
   const logout = () => {
     Cookies.remove("member");
-    toastr.success('Logout Success');
+    toastr.success("Logout Success");
     setTimeout(() => {
-      Router.push("/");
+      location.replace("/");
     }, 1000);
-
   };
   const openSlideMenu = () => {
     if (slideMenu === "none") {
@@ -64,8 +62,14 @@ const Header = (props) => {
     <div id="header">
       <nav className="navbar navbar-light bg-dark justify-content-between ">
         <div style={{ marginLeft: 30 }}>
-          <Link href="/" >
-              <img src="/images/bw-4.png" alt="" width="80vw" height="50vh" style={{cursor: 'pointer'}}/>
+          <Link href="/">
+            <img
+              src="/images/bw-4.png"
+              alt=""
+              width="80vw"
+              height="50vh"
+              style={{ cursor: "pointer" }}
+            />
           </Link>
         </div>
         <form
@@ -108,10 +112,15 @@ const Header = (props) => {
             <div className="icon-user-regular"></div>
           </button>
           <div
-            style={{ fontSize: "12px", marginRight: "10px", marginLeft: "5px",display: login, }}
+            style={{
+              fontSize: "12px",
+              marginRight: "10px",
+              marginLeft: "5px",
+              display: login,
+            }}
           >
             <div>
-                <span>{memberData.mem_username}</span>
+              <span>{memberData.mem_username}</span>
             </div>
             <div>
               <span>{`${memberData.balance} TB`}</span>
@@ -124,7 +133,7 @@ const Header = (props) => {
               padding: "5px",
               marginRight: 5,
               display: login,
-              color: 'rgb(250, 209, 107)'
+              color: "rgb(250, 209, 107)",
             }}
           >
             <div className="fas fa-redo"></div>
@@ -170,16 +179,17 @@ const Header = (props) => {
           <ul className="nav nav-pills">
             {path.map((b, index) => {
               if (b.login) {
-                if(b.show){
+                if (b.show) {
                   return (
                     <li className="nav-item" key={index}>
-                      <a
-                        className={`nav-link ${b.active}`}
-                        href={b.pathName}
-                        style={{ padding: "5px" }}
-                      >
-                        {b.textTh}
-                      </a>
+                      <Link href={b.pathName}>
+                        <a
+                          className={`nav-link ${b.active}`}
+                          style={{ padding: "5px" }}
+                        >
+                          {b.textTh}
+                        </a>
+                      </Link>
                     </li>
                   );
                 }
@@ -194,16 +204,17 @@ const Header = (props) => {
           <ul className="nav nav-pills">
             {path.map((b, index) => {
               if (b.notLogin) {
-                if(b.show){
+                if (b.show) {
                   return (
                     <li className="nav-item" key={index}>
-                      <a
-                        className={`nav-link ${b.active}`}
-                        href={b.pathName}
-                        style={{ padding: "5px" }}
-                      >
-                        {b.textTh}
-                      </a>
+                      <Link href={b.pathName}>
+                        <a
+                          className={`nav-link ${b.active}`}
+                          style={{ padding: "5px" }}
+                        >
+                          {b.textTh}
+                        </a>
+                      </Link>
                     </li>
                   );
                 }

@@ -25,7 +25,6 @@ export default function register() {
     if (validateData()) {
       const regiserResult = await memberService.createMember(registerData);
       if (regiserResult.data.status === 2000) {
-        console.log(regiserResult);
         toastr.success("สมัครสมาชิกเรียบร้อย คุณสามารถเข้าสู้ระบบได้แล้ว");
         setRegisterSuccess(true);
         setRegisterData(regiserResult.data.data);

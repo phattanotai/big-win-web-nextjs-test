@@ -121,7 +121,6 @@ export default function home() {
           });
         }
         setLoader('none');
-        console.log(gamesArray)
         setGameList(gamesArray);
         setGameShow(gamesArray[0].data);
       }

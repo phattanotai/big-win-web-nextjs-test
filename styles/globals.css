@@ -91,20 +91,24 @@ a {
   position: relative;
   top: 115px;
 }
-@media only screen and (max-width: 760px) {
-  #content {
-    top: 66px;
-  }
-}
-
 #content .line-btn{
   padding: 8px !important;
   position: fixed;
   z-index: 200000;
   right: 10px;
-  top: 80%;
+  top: 86%;
   box-shadow: 1px 1px black;
 }
+@media only screen and (max-width: 760px) {
+  #content {
+    top: 66px;
+  }
+  #content .line-btn{  
+    top: 80%;
+  }
+}
+
+
 /* Slideshow container */
 .slideshow-container {
   max-width: 1000px;
