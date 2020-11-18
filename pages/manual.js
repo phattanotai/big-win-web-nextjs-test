@@ -30,7 +30,7 @@ export default function manual() {
                 <img className="qrLoad" src="./images/Image 8@2x.png" />
               </div>
               <div style={{ marginTop: 50 }}>
-                <img className="imgLoad" src="./images/unnamed (-1@2x.png" />
+                <img className="imgLoad" src="./images/google-play-badge-2.png" />
               </div>
             </div>
             <div className="col-6" style={{ textAlign: "center" }}>
