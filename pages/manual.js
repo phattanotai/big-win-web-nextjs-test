@@ -9,7 +9,7 @@ export default function manual() {
   return (
     <LayoutHoc>
       <div id="manual">
-        <div className="jeckpotDiv">
+        <div className="manualDiv">
           <div className="row">
             <div className="col-12">
               <div className="manualHeader">

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 import menu from "./functions/menu";
 
 export default function SlideMenu({ showMenu, onSubmit }) {
   const router = useRouter();
   const [path, setPath] = useState(menu);
-
+  const [isLogin, setIsLogin] = useState(false);
   useEffect(() => {
     if (router.pathname) {
       setPath(
@@ -16,27 +17,57 @@ export default function SlideMenu({ showMenu, onSubmit }) {
         )
       );
     }
+
+    if (Boolean(Cookies.get("member"))) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+
   }, []);
 
   return (
     <div id="slide-menu" style={{ display: showMenu }}>
       <div className="container" style={{ textAlign: "center", marginTop: 30 }}>
-        <ul className="nav flex-column">
+        <ul className="nav flex-column" style={{ display: isLogin ? "block" : "none" }}>
           {path.map((b, index) => {
-            return (
-              <li className="nav-item" key={index}>
-                <a
-                  className={`nav-link ${b.active}`}
-                  href={b.pathName}
-                  style={{ padding: "5px" }}
-                >
-                  {b.textTh}
-                </a>
-              </li>
-            );
+             if (b.login) {
+              if(b.show){
+                return (
+                  <li className="nav-item" key={index}>
+                    <a
+                      className={`nav-link ${b.active}`}
+                      href={b.pathName}
+                      style={{ padding: "5px" }}
+                    >
+                      {b.textTh}
+                    </a>
+                  </li>
+                );
+              }
+            }
           })}
         </ul>
 
+        <ul className="nav flex-column" style={{ display: isLogin ? "none" : "block" }}>
+          {path.map((b, index) => {
+             if (b.notLogin) {
+              if(b.show){
+                return (
+                  <li className="nav-item" key={index}>
+                    <a
+                      className={`nav-link ${b.active}`}
+                      href={b.pathName}
+                      style={{ padding: "5px" }}
+                    >
+                      {b.textTh}
+                    </a>
+                  </li>
+                );
+              }
+            }
+          })}
+        </ul>
         <div>
         <button
           className="w3-button w3-block w3-light-blue"

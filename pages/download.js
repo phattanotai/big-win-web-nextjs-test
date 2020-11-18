@@ -27,7 +27,7 @@ export default function download() {
             </div>
           </div>
         </div>
-        <div className="jeckpotDiv">
+        <div className="downloadDiv">
           <div className="row">
             <div className="col-6" style={{ textAlign: "center" }}>
               <div style={{ marginTop: 120 }}>

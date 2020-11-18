@@ -104,7 +104,7 @@ export default function LoginModal() {
                 <button type="button" className="btn btn-primary btn-block" onClick={loginMember}>
                     เข้าสู่ระบบ
                 </button>
-                <a>ลืมรหัสผ่าน?</a>
+                {/* <a>ลืมรหัสผ่าน?</a> */}
               </form>
             </div>
             <div className="modal-footer">

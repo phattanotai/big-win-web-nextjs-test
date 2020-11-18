@@ -6,6 +6,7 @@ const menu = [
     pathName: "/",
     textTh: "หน้าแรก",
     textEn: "",
+    show: true
   },
   {
     active: "",
@@ -14,6 +15,7 @@ const menu = [
     pathName: "/home",
     textTh: "หน้าหลัก",
     textEn: "",
+    show: true
   },
   {
     active: "",
@@ -22,6 +24,7 @@ const menu = [
     pathName: "/games",
     textTh: "เกมส์",
     textEn: "",
+    show: true
   },
   ,
   {
@@ -31,6 +34,7 @@ const menu = [
     pathName: "/casino",
     textTh: "คาสิโนสด",
     textEn: "",
+    show: false
   },
 
   {
@@ -40,6 +44,7 @@ const menu = [
     pathName: "/download",
     textTh: "ดาวน์โหลด",
     textEn: "",
+    show: true
   },
   {
     active: "",
@@ -48,6 +53,7 @@ const menu = [
     pathName: "/manual",
     textTh: "คู่มือ",
     textEn: "",
+    show: true
   },
 ];
 

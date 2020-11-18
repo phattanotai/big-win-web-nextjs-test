@@ -44,7 +44,11 @@ const Header = (props) => {
   };
   const logout = () => {
     Cookies.remove("member");
-    Router.push("/");
+    toastr.success('Logout Success');
+    setTimeout(() => {
+      Router.push("/");
+    }, 1000);
+
   };
   const openSlideMenu = () => {
     if (slideMenu === "none") {
@@ -60,7 +64,9 @@ const Header = (props) => {
     <div id="header">
       <nav className="navbar navbar-light bg-dark justify-content-between ">
         <div style={{ marginLeft: 30 }}>
-          <img src="/images/bw-4.png" alt="" width="80vw" height="50vh" />
+          <Link href="/" >
+              <img src="/images/bw-4.png" alt="" width="80vw" height="50vh" style={{cursor: 'pointer'}}/>
+          </Link>
         </div>
         <form
           className="form-inline"
@@ -78,7 +84,7 @@ const Header = (props) => {
           >
             เข้าสู่ระบบ
           </button>
-          <button
+          {/* <button
             type="button"
             className="btn btn-info h-btn"
             style={{
@@ -88,7 +94,7 @@ const Header = (props) => {
             }}
           >
             <Link href="/register">สมัครสมาชิก</Link>
-          </button>
+          </button> */}
 
           <button
             type="button"
@@ -105,7 +111,7 @@ const Header = (props) => {
             style={{ fontSize: "12px", marginRight: "10px", marginLeft: "5px",display: login, }}
           >
             <div>
-          <span>{memberData.mem_username}</span>
+                <span>{memberData.mem_username}</span>
             </div>
             <div>
               <span>{`${memberData.balance} TB`}</span>
@@ -164,17 +170,19 @@ const Header = (props) => {
           <ul className="nav nav-pills">
             {path.map((b, index) => {
               if (b.login) {
-                return (
-                  <li className="nav-item" key={index}>
-                    <a
-                      className={`nav-link ${b.active}`}
-                      href={b.pathName}
-                      style={{ padding: "5px" }}
-                    >
-                      {b.textTh}
-                    </a>
-                  </li>
-                );
+                if(b.show){
+                  return (
+                    <li className="nav-item" key={index}>
+                      <a
+                        className={`nav-link ${b.active}`}
+                        href={b.pathName}
+                        style={{ padding: "5px" }}
+                      >
+                        {b.textTh}
+                      </a>
+                    </li>
+                  );
+                }
               }
             })}
           </ul>
@@ -186,17 +194,19 @@ const Header = (props) => {
           <ul className="nav nav-pills">
             {path.map((b, index) => {
               if (b.notLogin) {
-                return (
-                  <li className="nav-item" key={index}>
-                    <a
-                      className={`nav-link ${b.active}`}
-                      href={b.pathName}
-                      style={{ padding: "5px" }}
-                    >
-                      {b.textTh}
-                    </a>
-                  </li>
-                );
+                if(b.show){
+                  return (
+                    <li className="nav-item" key={index}>
+                      <a
+                        className={`nav-link ${b.active}`}
+                        href={b.pathName}
+                        style={{ padding: "5px" }}
+                      >
+                        {b.textTh}
+                      </a>
+                    </li>
+                  );
+                }
               }
             })}
           </ul>

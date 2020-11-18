@@ -5,7 +5,14 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>Bigwin Web</title>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="description" content="เบ็ทมั่นคง บริการคาสิโนออนไลน์ ยิงปลา สล็อต บาคาร่า แทงบอล สมัครง่าย ฝาก-ถอนอัตโนมัติ รวดเร็ว และพนักงานพร้อมให้บริการตลอด 24 ชม. คืนยอดเสีย สร้างรายได้ชวนเพื่อนเรทดีที่สุด" />
+          <meta name="robots" content="index, follow" />
+          <title>Bigwin Web เว็บเกมส์ออนไลน์ที่ดีที่สุด</title>
+
+          <link rel="icon" type="image/png" href="/images/bw-4.png" sizes="16x16"></link>
           <link
             href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
             rel="stylesheet"

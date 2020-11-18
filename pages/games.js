@@ -6,6 +6,7 @@ import Router, { useRouter } from "next/router";
 import fx from "../components/functions/useUser";
 import memberService from "../services/member";
 import Slider from "react-slick";
+import env from "../env";
 
 export default function games() {
   const [settings, setSettings] = useState({
@@ -19,10 +20,12 @@ export default function games() {
   let gamesArray = [];
   const router = useRouter();
   const [mobile, setMoblie] = useState(false);
+  const [loader, setLoader] = useState('block');
   const [gameList, setGameList] = useState([]);
   const [gameShow, setGameShow] = useState([]);
   const [gameType, setGameType] = useState(0);
   const [gameSlot, setGameSlot] = useState(null);
+  const [slot, setSlot] = useState(false);
   const [memberData, setMemberDate] = useState({
     agent_code: "",
     balance: "",
@@ -50,60 +53,66 @@ export default function games() {
       }
       const gamesResult = await memberService.loadgameAll(member.agent_code);
       if (gamesResult.data.status === 2000) {
-        gamesArray.push({
-          textTh: "เกมส์ฮิต",
-          textEn: "Hits",
-          data: gamesResult.data.data[5].gamelist[0]["Hits"],
-        });
-        gamesArray.push({
-          textTh: "เกมส์การ์ด",
-          textEn: "Card",
-          data: gamesResult.data.data[5].gamelist[1]["Card"],
-        });
-
-        const slot = [];
-        for(const i of gamesResult.data.data[5].gamelist[2]["Slot"]){
-            Object.entries(i).forEach(([key, value]) => {
-                slot.push({
-                    name: key,
-                    img: value.img,
-                    data: value.data
+        for await (const i of gamesResult.data.data[5].gamelist) {
+          Object.entries(i).forEach(([key, value]) => {
+            let game_name;
+            let slot = [];
+            if (key === "Hits") {
+              game_name = "เกมส์ฮิต";
+            } else if (key === "Card") {
+              game_name = "เกมส์การ์ด";
+            } else if (key === "Slot") {
+              game_name = "เกมส์สล็อต";
+              for (const l of value){
+                Object.entries(l).forEach(([key2, value2]) => {
+                  slot.push({
+                    name: key2,
+                    img: value2.img,
+                    data: value2.data,
+                  });
                 });
-            })
+              }
+            } else if (key === "FishHunter") {
+              game_name = "เกมส์ยิงปลา";
+            } else if (key === "LiveCasino") {
+              game_name = "คาสิโนสด";
+            }else if (key === "Livecasino") {
+              game_name = "คาสิโนสด";
+            } else if (key === "Fish") {
+              game_name = "เกมส์ยิงปลา";
+            } else if (key === "Arcade") {
+              game_name = "เกมส์อาเขต";
+            }
+
+            if (key === "Slot") {
+              gamesArray.push({
+                textTh: game_name,
+                textEn: key,
+                data: slot,
+              });
+            } else {
+              gamesArray.push({
+                textTh: game_name,
+                textEn: key,
+                data: value,
+              });
+            }
+          });
         }
-        gamesArray.push({
-          textTh: "เกมส์สล็อต",
-          textEn: "Slot",
-          data: slot,
-        });
-        gamesArray.push({
-          textTh: "เกมส์ยิงปลา",
-          textEn: "FishHunter",
-          data: gamesResult.data.data[5].gamelist[3]["FishHunter"],
-        });
-        gamesArray.push({
-          textTh: "คาสิโนสด",
-          textEn: "LiveCasino",
-          data: gamesResult.data.data[5].gamelist[4]["LiveCasino"],
-        });
-        gamesArray.push({
-          textTh: "เกมส์ยิงปลา",
-          textEn: "Fish",
-          data: gamesResult.data.data[5].gamelist[5]["Fish"],
-        });
-        gamesArray.push({
-          textTh: "เกมส์อาเขต",
-          textEn: "Arcade",
-          data: gamesResult.data.data[5].gamelist[6]["Arcade"],
-        });
+        setLoader('none');
         setGameList(gamesArray);
-        console.log(gamesArray);
+        console.log(gamesArray)
         setGameShow(gamesArray[0].data);
       }
     }
   }, []);
 
-  const seleteGame = (tyle) => {
+  const seleteGame = (tyle,name) => {
+    if(name === 'Slot'){
+      setSlot(true);
+    }else{
+      setSlot(false);
+    }
     setGameSlot(null);
     setGameType(tyle);
     setGameShow(gameList[tyle].data);
@@ -113,7 +122,11 @@ export default function games() {
     setGameSlot(tyle);
     setGameShow(gameList[gameType].data[tyle].data);
   };
-
+  const playGame = (g) => {
+    const url =  `${env.endpoint_game}/${g.game_brand}/launch/${g.game_code}/${memberData.agent_code}/${memberData.mem_username}`;
+    console.log(url)
+    location.replace(url);
+  };
   return (
     <LayoutHoc>
       <div id="games">
@@ -149,6 +162,7 @@ export default function games() {
         </div>
 
         <div className="games-container">
+          <div className="loader" style={{display: loader}}></div>
           <div className="game-menu">
             <Slider {...settings}>
               {gameList.map((b, index) => {
@@ -157,10 +171,10 @@ export default function games() {
                     <li
                       className="nav-item"
                       onClick={() => {
-                        seleteGame(index);
+                        seleteGame(index,b.textEn);
                       }}
                     >
-                      <a className="nav-link " href="#">
+                      <a className="nav-link">
                         {b.textTh}
                       </a>
                     </li>
@@ -171,76 +185,86 @@ export default function games() {
           </div>
           <div className="row">
             {gameShow.map((b, index) => {
-                if(gameType !== 2){
-                    return (
-                        <div className="col-sm-2 col-6" key={b._id}>
-                          <div className="img-container">
-                            <img
-                              src={`https://BigWin1234.com/public/${b.game_img}`}
-                              alt={b.game_brand}
-                              name={b.game_name}
-                              className="image"
-                              style={{ objectFit: "contain", marginTop: 30 }}
-                            />
-                            <div className="middle">
-                              <div className="game-text">{b.game_name}</div>
-                              <button className="game-btn btn btn-info   w3-round-xxlarge">
-                                เล่น
-                              </button>
-                            </div>
-                          </div>
+              if (!slot) {
+                return (
+                  <div className="col-sm-2 col-6" key={b._id}>
+                    <div className="img-container">
+                      <img
+                        src={`${env.endpoint_img}/${b.game_img}`}
+                        alt={b.game_brand}
+                        name={b.game_name}
+                        className="image"
+                        style={{ objectFit: "contain", marginTop: 30 }}
+                      />
+                      <div className="middle">
+                        <div className="game-text">{b.game_name}</div>
+                        <button
+                          className="game-btn btn btn-info   w3-round-xxlarge"
+                          onClick={() => {
+                            playGame(b);
+                          }}
+                        >
+                          เล่น
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              } else {   
+                if (gameSlot !== null) {
+                  return (
+                    <div className="col-sm-2 col-6" key={b._id}>
+                      <div className="img-container">
+                        <img
+                          src={`${env.endpoint_img}/${b.game_img}`}
+                          alt={b.game_brand}
+                          name={b.game_name}
+                          className="image"
+                          style={{ objectFit: "contain", marginTop: 30 }}
+                        />
+                        <div className="middle">
+                          <div className="game-text">{b.game_name}</div>
+                          <button
+                            className="game-btn btn btn-info   w3-round-xxlarge"
+                            onClick={() => {
+                              playGame(b);
+                            }}
+                          >
+                            เล่น
+                          </button>
                         </div>
-                      );
-                }else{
-                    if(gameSlot !== null){
-                        return (
-                            <div className="col-sm-2 col-6" key={b._id}>
-                              <div className="img-container">
-                                <img
-                                  src={`https://BigWin1234.com/public/${b.game_img}`}
-                                  alt={b.game_brand}
-                                  name={b.game_name}
-                                  className="image"
-                                  style={{ objectFit: "contain", marginTop: 30 }}
-                                />
-                                <div className="middle">
-                                  <div className="game-text">{b.game_name}</div>
-                                  <button className="game-btn btn btn-info   w3-round-xxlarge">
-                                    เล่น
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                    }else{
-                        return (
-                            <div className="col-sm-2 col-6" key={index}>
-                              <div className="img-container">
-                                <img
-                                  src={`https://BigWin1234.com/public/${b.img}`}
-                                  alt={b.img}
-                                  name={b.img}
-                                  className="image"
-                                  style={{ objectFit: "contain", marginTop: 30 }}
-                                />
-                                <div className="middle">
-                                  <div className="game-text">{b.name}</div>
-                                  <button className="game-btn btn btn-info   w3-round-xxlarge" onClick={()=> {
-                                      seleteSlotGame(index)
-                                  }}>
-                                   เลือก
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                    }
-                    
+                      </div>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div className="col-sm-2 col-6" key={index}>
+                      <div className="img-container">
+                        <img
+                          src={`${env.endpoint_img}/${b.img}`}
+                          alt={b.img}
+                          name={b.img}
+                          className="image"
+                          style={{ objectFit: "contain", marginTop: 30 }}
+                        />
+                        <div className="middle">
+                          <div className="game-text">{b.name}</div>
+                          <button
+                            className="game-btn btn btn-info   w3-round-xxlarge"
+                            onClick={() => {
+                              seleteSlotGame(index);
+                            }}
+                          >
+                            เลือก
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
                 }
-             
+              }
             })}
           </div>
-
         </div>
       </div>
     </LayoutHoc>

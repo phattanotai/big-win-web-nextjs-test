@@ -1,7 +1,5 @@
 
 import Header from "../../components/Layout/Header";
-import Sidebar from "./Sidebar";
-import ControlSidebar from "../../components/Layout/ControlSidebar";
 import Content from "../../components/Layout/Content";
 import Footer from "../../components/Layout/Footer";
 import PropTypes from 'prop-types';
@@ -17,7 +15,9 @@ class LayoutHoc extends React.Component {
     componentDidMount(){
         this.setState({mobile: window.matchMedia("only screen and (max-width: 760px)").matches});
         window.addEventListener('resize',()=> {
-            location.reload();
+            if(this.state.mobile !== window.matchMedia("only screen and (max-width: 760px)").matches){
+                location.reload();
+            }
         });
         fx.checkLogin('/', true);
     }
