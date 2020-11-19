@@ -3,7 +3,7 @@ import Header from "../../components/Layout/Header";
 import Content from "../../components/Layout/Content";
 import Footer from "../../components/Layout/Footer";
 import PropTypes from 'prop-types';
-import React from 'React';
+import React from 'react';
 import fx from '../functions/useUser';
 class LayoutHoc extends React.Component {
     constructor(props) {

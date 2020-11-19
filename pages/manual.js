@@ -1,18 +1,17 @@
 import LayoutHoc from "../components/Layout/LayoutHoc";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function manual() {
   const [mobile, setMoblie] = useState(false);
-  useEffect(async () => {
+  useEffect(() => {
     setMoblie(window.matchMedia("only screen and (max-width: 760px)").matches);
   }, []);
   return (
     <LayoutHoc>
       <div id="manual">
-        <div className="bg-image">
-
-        </div>
         <div className="manualDiv">
+          <div className="bg-image">
+          </div>
           <div className="row">
             <div className="col-12">
               <div className="manualHeader">

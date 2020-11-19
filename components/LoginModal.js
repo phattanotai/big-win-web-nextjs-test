@@ -1,5 +1,5 @@
 import memberService from '../services/member';
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import fx from '../components/functions/useUser';
 export default function LoginModal() {
@@ -32,11 +32,13 @@ export default function LoginModal() {
           }
         } 
       })
-    }else{
+    }else if(login1.data.status === 2000){
       Cookies.set('member',fx.encode(login1.data.data));
       setTimeout(() => {
         location.replace('/home');
       }, 500);
+      toastr.success('Login ' + login1.data.message);
+    }else{
       toastr.success('Login ' + login1.data.message);
     }
   }

@@ -1,9 +1,9 @@
 import LayoutHoc from "../components/Layout/LayoutHoc";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function download() {
   const [mobile, setMoblie] = useState(false);
-  useEffect(async () => {
+  useEffect(() => {
     setMoblie(window.matchMedia("only screen and (max-width: 760px)").matches);
   }, []);
   return (
@@ -27,9 +27,9 @@ export default function download() {
             </div>
           </div>
         </div>
-        <div className="bg-image"></div>
         <div className="downloadDiv">
-          <div className="row" style={{ marginTop: mobile? 0 : 120 }}>
+        <div className="bg-image"></div>
+          <div className="row" style={{ paddingTop: mobile? 70 : 120 }}>
             <div className="col-6" style={{ textAlign: "center",borderRight: "3px solid rgb(250, 209, 107)", }}>
               <div >
                 <img className="qrLoad" src="./images/Image 8@2x.png" />

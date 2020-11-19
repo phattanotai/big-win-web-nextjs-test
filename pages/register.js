@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LayoutHoc from "../components/Layout/LayoutHoc";
 import fx from "../components/functions/useUser";
 import memberService from "../services/member";

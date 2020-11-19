@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LoginModal from "../LoginModal";
 import RegisterModal from "../RegisterModal";
 import SlideMenu from "../SlideMenu";
@@ -18,7 +18,7 @@ const Header = (props) => {
   const [path, setPath] = useState(menu);
   const [memberData, setMemberDate] = useState({});
 
-  useEffect(async () => {
+  useEffect(() => {
     if (Boolean(Cookies.get("member"))) {
       setLogin("block");
       setNotLogin("none");
@@ -63,6 +63,7 @@ const Header = (props) => {
       <nav className="navbar navbar-light bg-dark justify-content-between ">
         <div style={{ marginLeft: 30 }}>
           <Link href="/">
+            <a>
             <img
               src="/images/bw-4.png"
               alt=""
@@ -70,6 +71,7 @@ const Header = (props) => {
               height="50vh"
               style={{ cursor: "pointer" }}
             />
+            </a>
           </Link>
         </div>
         <form

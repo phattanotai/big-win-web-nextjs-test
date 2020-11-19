@@ -13,6 +13,7 @@ export default class MyDocument extends Document {
           <title>Bigwin เว็บเกมส์ออนไลน์ที่ดีที่สุด</title>
 
           <link rel="icon" type="image/png" href="/images/bw-4.png" sizes="30x30"></link>
+          <link rel="stylesheet" href="/_next/static/style.css" />
           <link
             href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
             rel="stylesheet"

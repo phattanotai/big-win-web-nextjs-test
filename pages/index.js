@@ -1,5 +1,5 @@
 import LayoutHoc from "../components/Layout/LayoutHoc";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import banner from "../components/functions/banner";
 import SlideImages from "../components/SlideImgages";
 
@@ -14,9 +14,9 @@ export default function Home() {
     <LayoutHoc>
       <SlideImages imagesArray={banners} nameEl='banners'/>
       <div className="contentDiv" >
+        <div className="jeckpotDiv">
         <div className="bg-image">
         </div>
-        <div className="jeckpotDiv">
           <div className="row">
             <div className="col-sm-12">
               <div id="jeckpot" style={{marginTop: 0}}>

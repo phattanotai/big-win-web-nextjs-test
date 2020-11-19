@@ -102,6 +102,7 @@ a {
 @media only screen and (max-width: 760px) {
   #content {
     top: 66px;
+    min-height: 100%;
   }
   #content .line-btn{  
     top: 80%;
@@ -298,33 +299,31 @@ footer .footer-menu {
 
 .bg-image{
   background-image: url("../public/images/Image -1.png");
-  height: 100vh;
+  height: 100%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   filter: blur(4px);
   -webkit-filter: blur(4px);
+
+  position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
 }
 
 .jeckpotDiv {
   height: 100vh;
   width: 100%;
-  position: absolute;
-  top: 28%;
+  position: relative;
   z-index: 1000;
 }
 
 @media only screen and (max-width: 760px) {
   .jeckpotDiv {
-    top: 5%;
+    height: 50vh;
   }
-  .bg-image{
-    height: 40vh;
-  }
-  #home .bg-image{
-    height: 45vh;
-  }
-  
   .jeckpotDiv #money,.homeJeckpotDiv #money {
     height: 20vh;
   }
@@ -410,17 +409,20 @@ footer .footer-menu {
 .downloadDiv {
   height: 100vh;
   width: 100%;
-  position: absolute;
-  top: 30%;
+  position: relative;
   z-index: 1000;
 }
 
 @media only screen and (max-width: 760px) {
   .downloadDiv {
-    top: 37%;
+    height: 55vh;
   }
   #download .bg-image{
     height: 50vh;
+  }
+
+  #manual .bg-image{
+    height: 55vh;
   }
 }
 
@@ -500,23 +502,19 @@ footer .footer-menu {
     font-size: 13px;
   }
 
-  #manual .bg-image{
-    height: 60vh;
-  }
 }
 
 .manualDiv {
   height: 100vh;
   width: 100%;
-  position: absolute;
+  position: relative;
   top: 0px;
   z-index: 1000;
 }
 
 @media only screen and (max-width: 760px) {
   .manualDiv {
-    top: 40px;
-    height: 100vh;
+    height: 60vh;
   }
 }
 
@@ -626,19 +624,14 @@ footer .footer-menu {
   .game-text {
     font-size: 14px;
   }
-  .game-menu {
-    max-width: 80%;
-    margin: auto;
-    margin-bottom: 20px;
-  }
 }
 /* end games */
 /* home */
-#home .game-menu{
+.game-menu{
   max-width: 60%;
 }
 
-#home .search-game{
+.search-game{
   position: relative;
   left: 120%;
   top: -40px;
@@ -648,8 +641,7 @@ footer .footer-menu {
 .homeJeckpotDiv {
   height: 100vh;
   width: 100%;
-  position: absolute;
-  top: 350px;
+  position: relative;
   z-index: 1000;
 }
 @media only screen and (max-width: 760px) {
@@ -661,20 +653,19 @@ footer .footer-menu {
   .game-text {
     font-size: 14px;
   }
-  #home .game-menu{
+   .game-menu{
     max-width: 80%;
     margin: auto;
     margin-bottom: 20px;
   }
 
-  #home .search-game{
+   .search-game{
     width:100%;
     left: 0;
     top: 10px;
   }
 
   .homeJeckpotDiv {
-    top: 70px;
     height: 50vh;
   }
 }

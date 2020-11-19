@@ -1,47 +1,52 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import brand from "../../services/brand";
 import LoginModal from "../LoginModal";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
-import fx from '../functions/useUser';
+import fx from "../functions/useUser";
 import env from "../../env";
 
 const Footer = (props) => {
   const [mobile, setMoblie] = useState(false);
   const [brands, setBrands] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
-  const [memberData,setMemberDate] = useState({});
+  const [memberData, setMemberDate] = useState({});
   const [login, setLogin] = useState("none");
   const [notLogin, setNotLogin] = useState("none");
 
-  useEffect(async () => {
-    const data = await brand.getBrandsSort();
-    setBrands(data.data.data);
-    setMoblie(window.matchMedia("only screen and (max-width: 760px)").matches);
-    if (Boolean(Cookies.get("member"))) {
-      setLogin("block");
-      setNotLogin("none");
-      setIsLogin(true);
+  useEffect(() => {
+    async function fetchData() {
+      const data = await brand.getBrandsSort();
+      setBrands(data.data.data);
+      setMoblie(
+        window.matchMedia("only screen and (max-width: 760px)").matches
+      );
+      if (Boolean(Cookies.get("member"))) {
+        setLogin("block");
+        setNotLogin("none");
+        setIsLogin(true);
 
-      setMemberDate(fx.decode(Cookies.get("member")));
-    } else {
-      setNotLogin("block");
-      setLogin("none");
-      setIsLogin(false);
+        setMemberDate(fx.decode(Cookies.get("member")));
+      } else {
+        setNotLogin("block");
+        setLogin("none");
+        setIsLogin(false);
+      }
     }
+    fetchData();
   }, []);
   const openModal = () => {
     $("#loginModal").modal("show");
   };
-  const logout = () =>{
+  const logout = () => {
     Cookies.remove("member");
     toastr.success("Logout Success");
     setTimeout(() => {
       location.replace("/");
     }, 1000);
-  }
+  };
   return (
     <>
       <footer className="main-footer clearfix">
@@ -65,18 +70,19 @@ const Footer = (props) => {
               />
             </a>
           </div>
-          <div style={{marginTop: 40}}>
+          <div style={{ marginTop: 40 }}>
             <p>
-            เว็บเกมส์ออนไลน์ ครบวงจรที่ดีที่สุด พร้อมให้ทดลองด้วยตัวเอง ด้วยระบบที่ทันสมัย คาสิโนสด จากต่างประเทศ
+              เว็บเกมส์ออนไลน์ ครบวงจรที่ดีที่สุด พร้อมให้ทดลองด้วยตัวเอง
+              ด้วยระบบที่ทันสมัย คาสิโนสด จากต่างประเทศ
             </p>
             <p>
-            เรา คือเว็บไซต์เกมส์ไลน์ครบวงจรทั้ง บาคาร่า คาสิโน สล็อต รูเล็ต เสือมังกร เดิมพันกีฬาออนไลน์
+              เรา คือเว็บไซต์เกมส์ไลน์ครบวงจรทั้ง บาคาร่า คาสิโน สล็อต รูเล็ต
+              เสือมังกร เดิมพันกีฬาออนไลน์
             </p>
             <p>
-            เรามีแอดมินที่คอยช่วยดูแลมากมาย และบริการ 24 ชม. หมดปัญหาการตอบลูกค้าช้าด้วยระบบออโต้ที่รวดเร็ว เว็บไซต...
+              เรามีแอดมินที่คอยช่วยดูแลมากมาย และบริการ 24 ชม.
+              หมดปัญหาการตอบลูกค้าช้าด้วยระบบออโต้ที่รวดเร็ว เว็บไซต...
             </p>
-
-
           </div>
           <div style={{ marginBottom: 30, marginTop: 30 }}>
             <img
@@ -87,7 +93,7 @@ const Footer = (props) => {
               style={{ objectFit: "contain" }}
             />
           </div>
-        
+
           {brands.map((b, index) => {
             return (
               <Link href="" key={`${b._id}`}>
@@ -115,7 +121,11 @@ const Footer = (props) => {
           <nav className="footer-menu navbar navbar-light  justify-content-between">
             <div
               className="row"
-              style={{ width: "100vw", textAlign: "center",display: isLogin? 'none' : 'flex' }}
+              style={{
+                width: "100vw",
+                textAlign: "center",
+                display: isLogin ? "none" : "flex",
+              }}
             >
               <div className="col-12">
                 <a className="nav-link" href="#" onClick={openModal}>
@@ -128,25 +138,36 @@ const Footer = (props) => {
                 </Link>
               </div> */}
             </div>
-            <div className="row"  style={{ width: "100vw", textAlign: "center",display: !isLogin? 'none' : 'flex' }}>
+            <div
+              className="row"
+              style={{
+                width: "100vw",
+                textAlign: "center",
+                display: !isLogin ? "none" : "flex",
+              }}
+            >
               <div className="col-6">
                 <a className="nav-link" href="#" onClick={logout}>
                   ออกจากระบบ
                 </a>
               </div>
               <div className="col-6">
-              <div
-            style={{ fontSize: "12px", marginRight: "10px", marginLeft: "5px", }}
-          >
-            <div>
-                <span>username : </span>
-                <span>{memberData.mem_username}</span>
-            </div>
-            <div>
-              <span>เครดิต : </span>
-              <span>{`${memberData.balance} TB`}</span>
-            </div>
-          </div>
+                <div
+                  style={{
+                    fontSize: "12px",
+                    marginRight: "10px",
+                    marginLeft: "5px",
+                  }}
+                >
+                  <div>
+                    <span>username : </span>
+                    <span>{memberData.mem_username}</span>
+                  </div>
+                  <div>
+                    <span>เครดิต : </span>
+                    <span>{`${memberData.balance} TB`}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </nav>
