@@ -215,7 +215,7 @@ export default function Games() {
                             playGame(b);
                           }}
                         >
-                          เล่น
+                          เล่นเกมส์
                         </button>
                       </div>
                     </div>
